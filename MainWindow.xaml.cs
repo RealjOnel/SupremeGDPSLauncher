@@ -2,14 +2,26 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using System.Windows.Media;
 
 namespace SupremeGDPSLauncher
 {
     public partial class MainWindow : Window
     {
+        private readonly string _baseDirectory;
+        private readonly string _gameExePath;
+        private readonly string _resourcesFolderPath;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            _baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            _gameExePath = Path.Combine(_baseDirectory, "SupremeGDPS.exe");
+            _resourcesFolderPath = Path.Combine(_baseDirectory, "Resources");
+
+            SetActiveNav("Home");
+            ValidateInstallation();
         }
 
         private void SetActiveNav(string pageName)
@@ -25,7 +37,6 @@ namespace SupremeGDPSLauncher
                     HomeButton.Style = (Style)FindResource("ActiveNavButtonStyle");
                     HomePanel.Visibility = Visibility.Visible;
                     PlaceholderPanel.Visibility = Visibility.Collapsed;
-                    StatusText.Text = "• Ready to launch";
                     break;
 
                 case "Updates":
@@ -33,7 +44,7 @@ namespace SupremeGDPSLauncher
                     HomePanel.Visibility = Visibility.Collapsed;
                     PlaceholderPanel.Visibility = Visibility.Visible;
                     MainTitle.Text = "Updates";
-                    StatusText.Text = "• No update check implemented yet";
+                    SetNeutralStatus("• No update check implemented yet");
                     break;
 
                 case "Features":
@@ -41,7 +52,7 @@ namespace SupremeGDPSLauncher
                     HomePanel.Visibility = Visibility.Collapsed;
                     PlaceholderPanel.Visibility = Visibility.Visible;
                     MainTitle.Text = "Features";
-                    StatusText.Text = "• Feature overview";
+                    SetNeutralStatus("• Feature overview");
                     break;
 
                 case "Settings":
@@ -49,14 +60,67 @@ namespace SupremeGDPSLauncher
                     HomePanel.Visibility = Visibility.Collapsed;
                     PlaceholderPanel.Visibility = Visibility.Visible;
                     MainTitle.Text = "Settings";
-                    StatusText.Text = "• Settings panel";
+                    SetNeutralStatus("• Settings panel");
                     break;
             }
+        }
+
+        private void ValidateInstallation()
+        {
+            bool hasGameExe = File.Exists(_gameExePath);
+            bool hasResources = Directory.Exists(_resourcesFolderPath);
+
+            if (hasGameExe && hasResources)
+            {
+                SetSuccessStatus("• Ready to launch");
+                return;
+            }
+
+            if (!hasGameExe && !hasResources)
+            {
+                SetErrorStatus("• SupremeGDPS.exe and Resources are missing");
+                return;
+            }
+
+            if (!hasGameExe)
+            {
+                SetErrorStatus("• SupremeGDPS.exe is missing");
+                return;
+            }
+
+            if (!hasResources)
+            {
+                SetErrorStatus("• Resources folder is missing");
+            }
+        }
+
+        private void SetNeutralStatus(string message)
+        {
+            StatusText.Text = message;
+            StatusText.Foreground = new SolidColorBrush(Color.FromRgb(139, 139, 139));
+        }
+
+        private void SetSuccessStatus(string message)
+        {
+            StatusText.Text = message;
+            StatusText.Foreground = new SolidColorBrush(Color.FromRgb(102, 187, 106));
+        }
+
+        private void SetErrorStatus(string message)
+        {
+            StatusText.Text = message;
+            StatusText.Foreground = new SolidColorBrush(Color.FromRgb(239, 83, 80));
+        }
+
+        private bool IsInstallationValid()
+        {
+            return File.Exists(_gameExePath) && Directory.Exists(_resourcesFolderPath);
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
             SetActiveNav("Home");
+            ValidateInstallation();
         }
 
         private void UpdatesButton_Click(object sender, RoutedEventArgs e)
@@ -76,15 +140,13 @@ namespace SupremeGDPSLauncher
 
         private void LaunchButton_Click(object sender, RoutedEventArgs e)
         {
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string gamePath = Path.Combine(baseDirectory, "SupremeGDPS.exe");
+            ValidateInstallation();
 
-            if (!File.Exists(gamePath))
+            if (!IsInstallationValid())
             {
-                StatusText.Text = "• Launch failed";
                 MessageBox.Show(
-                    "SupremeGDPS.exe was not found in the launcher directory.",
-                    "Launch Error",
+                    "The installation is incomplete. Please make sure SupremeGDPS.exe and the Resources folder are present in the launcher directory.",
+                    "Installation Error",
                     MessageBoxButton.OK,
                     MessageBoxImage.Error
                 );
@@ -93,18 +155,21 @@ namespace SupremeGDPSLauncher
 
             try
             {
+                SetNeutralStatus("• Launching game...");
+
                 Process.Start(new ProcessStartInfo
                 {
-                    FileName = gamePath,
-                    WorkingDirectory = baseDirectory,
+                    FileName = _gameExePath,
+                    WorkingDirectory = _baseDirectory,
                     UseShellExecute = true
                 });
 
-                StatusText.Text = "• Game launched successfully";
+                SetSuccessStatus("• Game launched successfully");
             }
             catch (Exception ex)
             {
-                StatusText.Text = "• Launch failed";
+                SetErrorStatus("• Launch failed");
+
                 MessageBox.Show(
                     $"The game could not be launched.\n\n{ex.Message}",
                     "Launch Error",
@@ -116,20 +181,20 @@ namespace SupremeGDPSLauncher
 
         private void OpenGameDirectory_Click(object sender, RoutedEventArgs e)
         {
-            string gameDirectory = AppDomain.CurrentDomain.BaseDirectory;
-
             try
             {
                 Process.Start(new ProcessStartInfo
                 {
-                    FileName = gameDirectory,
+                    FileName = _baseDirectory,
                     UseShellExecute = true
                 });
 
-                StatusText.Text = "• Opened game directory";
+                SetNeutralStatus("• Opened game directory");
             }
             catch (Exception ex)
             {
+                SetErrorStatus("• Could not open game directory");
+
                 MessageBox.Show(
                     $"The game directory could not be opened.\n\n{ex.Message}",
                     "Directory Error",
@@ -154,10 +219,12 @@ namespace SupremeGDPSLauncher
                     UseShellExecute = true
                 });
 
-                StatusText.Text = "• Opened AppData folder";
+                SetNeutralStatus("• Opened AppData folder");
             }
             catch (Exception ex)
             {
+                SetErrorStatus("• Could not open AppData folder");
+
                 MessageBox.Show(
                     $"The AppData folder could not be opened.\n\n{ex.Message}",
                     "Folder Error",

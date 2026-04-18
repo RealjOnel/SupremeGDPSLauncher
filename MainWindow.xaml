@@ -9,18 +9,10 @@
         Background="#1F1F1F">
 
     <Window.Resources>
-        <!-- Brushes -->
         <SolidColorBrush x:Key="WindowBg" Color="#232323"/>
         <SolidColorBrush x:Key="SidebarBg" Color="#080808"/>
-        <SolidColorBrush x:Key="PanelBg" Color="#2A2A2A"/>
-        <SolidColorBrush x:Key="CardBg" Color="#2D2D2D"/>
         <SolidColorBrush x:Key="AccentBrush" Color="#C93A2B"/>
-        <SolidColorBrush x:Key="AccentHoverBrush" Color="#D84837"/>
-        <SolidColorBrush x:Key="MutedBrush" Color="#8B8B8B"/>
-        <SolidColorBrush x:Key="SoftBorderBrush" Color="#3A3A3A"/>
-        <SolidColorBrush x:Key="MainTextBrush" Color="White"/>
 
-        <!-- Sidebar Navigation Button -->
         <Style x:Key="NavButtonStyle" TargetType="Button">
             <Setter Property="Foreground" Value="#D6D6D6"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -55,79 +47,10 @@
             </Setter>
         </Style>
 
-        <!-- Active Navigation Button -->
         <Style x:Key="ActiveNavButtonStyle" TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
             <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-        </Style>
-
-        <!-- Primary Button -->
-        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Width" Value="280"/>
-            <Setter Property="Height" Value="46"/>
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="Border"
-                                Background="{TemplateBinding Background}"
-                                CornerRadius="8">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="{StaticResource AccentHoverBrush}"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Border" Property="Opacity" Value="0.9"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Secondary Button -->
-        <Style x:Key="SecondaryButtonStyle" TargetType="Button">
-            <Setter Property="Foreground" Value="#CFCFCF"/>
-            <Setter Property="Background" Value="{StaticResource PanelBg}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource SoftBorderBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Width" Value="132"/>
-            <Setter Property="Height" Value="36"/>
-            <Setter Property="FontSize" Value="13"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="Border"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="8">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="#343434"/>
-                                <Setter TargetName="Border" Property="BorderBrush" Value="#4A4A4A"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Border" Property="Opacity" Value="0.9"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
         </Style>
     </Window.Resources>
 
@@ -146,7 +69,6 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <!-- Brand -->
                 <StackPanel Margin="0,28,0,0" HorizontalAlignment="Center">
                     <TextBlock Text="Supreme GDPS"
                                Foreground="White"
@@ -160,7 +82,6 @@
                                HorizontalAlignment="Center"/>
                 </StackPanel>
 
-                <!-- Navigation -->
                 <StackPanel Grid.Row="1" Margin="14,40,14,0" VerticalAlignment="Top">
                     <Button x:Name="HomeButton"
                             Content="⌂  Home"
@@ -183,9 +104,7 @@
                             Click="SettingsButton_Click"/>
                 </StackPanel>
 
-                <!-- Version -->
                 <TextBlock Grid.Row="2"
-                           x:Name="VersionText"
                            Text="v0.1"
                            Foreground="#676767"
                            FontSize="11"
@@ -194,76 +113,9 @@
             </Grid>
         </Border>
 
-        <!-- Main Area -->
+        <!-- Main Content -->
         <Grid Grid.Column="1" Background="#262626">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <!-- Home Panel -->
-            <Grid x:Name="HomePanel">
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-
-                    <!-- Small Logo Card -->
-                    <Border Width="120"
-                            Height="120"
-                            Background="{StaticResource CardBg}"
-                            CornerRadius="16"
-                            BorderBrush="#3A3A3A"
-                            BorderThickness="1"
-                            Margin="0,0,0,28">
-                        <Grid>
-                            <TextBlock Text="GD"
-                                       Foreground="{StaticResource AccentBrush}"
-                                       FontSize="38"
-                                       FontWeight="Bold"
-                                       FontFamily="Times New Roman"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
-                        </Grid>
-                    </Border>
-
-                    <!-- Launch Button -->
-                    <Button Content="▶  LAUNCH SUPREME GDPS"
-                            Style="{StaticResource PrimaryButtonStyle}"
-                            Margin="0,0,0,14"
-                            Click="LaunchButton_Click"/>
-
-                    <!-- Utility Buttons -->
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Content="AppData Folder"
-                                Style="{StaticResource SecondaryButtonStyle}"
-                                Margin="0,0,10,0"
-                                Click="OpenAppDataFolder_Click"/>
-
-                        <Button Content="Game Directory"
-                                Style="{StaticResource SecondaryButtonStyle}"
-                                Click="OpenGameDirectory_Click"/>
-                    </StackPanel>
-                </StackPanel>
-            </Grid>
-
-            <!-- Placeholder Content -->
-            <Grid x:Name="PlaceholderPanel" Visibility="Collapsed">
-                <TextBlock x:Name="MainTitle"
-                           Text="Updates"
-                           Foreground="White"
-                           FontSize="30"
-                           FontWeight="SemiBold"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
-            </Grid>
-
-            <!-- Status -->
-            <TextBlock Grid.Row="1"
-                       x:Name="StatusText"
-                       Text="• Ready to launch"
-                       Foreground="{StaticResource MutedBrush}"
-                       FontSize="12"
-                       Margin="0,0,18,10"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Bottom"/>
+            <ContentControl x:Name="MainContent"/>
         </Grid>
     </Grid>
 </Window>

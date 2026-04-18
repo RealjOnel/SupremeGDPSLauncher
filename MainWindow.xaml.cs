@@ -12,71 +12,159 @@ namespace SupremeGDPSLauncher
             InitializeComponent();
         }
 
+        private void SetActiveNav(string pageName)
+        {
+            HomeButton.Style = (Style)FindResource("NavButtonStyle");
+            UpdatesButton.Style = (Style)FindResource("NavButtonStyle");
+            FeaturesButton.Style = (Style)FindResource("NavButtonStyle");
+            SettingsButton.Style = (Style)FindResource("NavButtonStyle");
+
+            switch (pageName)
+            {
+                case "Home":
+                    HomeButton.Style = (Style)FindResource("ActiveNavButtonStyle");
+                    HomePanel.Visibility = Visibility.Visible;
+                    PlaceholderPanel.Visibility = Visibility.Collapsed;
+                    StatusText.Text = "• Ready to launch";
+                    break;
+
+                case "Updates":
+                    UpdatesButton.Style = (Style)FindResource("ActiveNavButtonStyle");
+                    HomePanel.Visibility = Visibility.Collapsed;
+                    PlaceholderPanel.Visibility = Visibility.Visible;
+                    MainTitle.Text = "Updates";
+                    StatusText.Text = "• No update check implemented yet";
+                    break;
+
+                case "Features":
+                    FeaturesButton.Style = (Style)FindResource("ActiveNavButtonStyle");
+                    HomePanel.Visibility = Visibility.Collapsed;
+                    PlaceholderPanel.Visibility = Visibility.Visible;
+                    MainTitle.Text = "Features";
+                    StatusText.Text = "• Feature overview";
+                    break;
+
+                case "Settings":
+                    SettingsButton.Style = (Style)FindResource("ActiveNavButtonStyle");
+                    HomePanel.Visibility = Visibility.Collapsed;
+                    PlaceholderPanel.Visibility = Visibility.Visible;
+                    MainTitle.Text = "Settings";
+                    StatusText.Text = "• Settings panel";
+                    break;
+            }
+        }
+
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
-            MainTitle.Text = "Welcome to Supreme GDPS";
+            SetActiveNav("Home");
         }
 
         private void UpdatesButton_Click(object sender, RoutedEventArgs e)
         {
-            MainTitle.Text = "Updates";
+            SetActiveNav("Updates");
         }
 
         private void FeaturesButton_Click(object sender, RoutedEventArgs e)
         {
-            MainTitle.Text = "Features";
+            SetActiveNav("Features");
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            MainTitle.Text = "Settings";
+            SetActiveNav("Settings");
         }
 
         private void LaunchButton_Click(object sender, RoutedEventArgs e)
         {
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            string gamePath = Path.Combine(baseDir, "SupremeGDPS.exe");
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string gamePath = Path.Combine(baseDirectory, "SupremeGDPS.exe");
 
             if (!File.Exists(gamePath))
             {
-                MessageBox.Show("SupremeGDPS.exe was not found",
-                                "Error",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Error);
+                StatusText.Text = "• Launch failed";
+                MessageBox.Show(
+                    "SupremeGDPS.exe was not found in the launcher directory.",
+                    "Launch Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
                 return;
             }
 
-            Process.Start(new ProcessStartInfo
+            try
             {
-                FileName = gamePath,
-                WorkingDirectory = baseDir,
-                UseShellExecute = true
-            });
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = gamePath,
+                    WorkingDirectory = baseDirectory,
+                    UseShellExecute = true
+                });
+
+                StatusText.Text = "• Game launched successfully";
+            }
+            catch (Exception ex)
+            {
+                StatusText.Text = "• Launch failed";
+                MessageBox.Show(
+                    $"The game could not be launched.\n\n{ex.Message}",
+                    "Launch Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+            }
         }
 
         private void OpenGameDirectory_Click(object sender, RoutedEventArgs e)
         {
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string gameDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
-            Process.Start(new ProcessStartInfo
+            try
             {
-                FileName = baseDir,
-                UseShellExecute = true
-            });
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = gameDirectory,
+                    UseShellExecute = true
+                });
+
+                StatusText.Text = "• Opened game directory";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"The game directory could not be opened.\n\n{ex.Message}",
+                    "Directory Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+            }
         }
 
         private void OpenAppDataFolder_Click(object sender, RoutedEventArgs e)
         {
-            string appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            string targetFolder = Path.Combine(appData, "SupremeGDPS");
+            string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string supremeAppDataFolder = Path.Combine(localAppData, "SupremeGDPS");
 
-            Directory.CreateDirectory(targetFolder);
-
-            Process.Start(new ProcessStartInfo
+            try
             {
-                FileName = targetFolder,
-                UseShellExecute = true
-            });
+                Directory.CreateDirectory(supremeAppDataFolder);
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = supremeAppDataFolder,
+                    UseShellExecute = true
+                });
+
+                StatusText.Text = "• Opened AppData folder";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"The AppData folder could not be opened.\n\n{ex.Message}",
+                    "Folder Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+            }
         }
     }
 }

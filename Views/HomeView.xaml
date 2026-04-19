@@ -110,103 +110,190 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Content="AppData Folder"
-            Style="{StaticResource SecondaryButtonStyle}"
-            Margin="0,0,10,0"
-            Click="OpenAppDataFolder_Click"/>
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Margin="0,0,10,0"
+                        Click="OpenAppDataFolder_Click"/>
 
                 <Button Content="Game Directory"
-            Style="{StaticResource SecondaryButtonStyle}"
-            Click="OpenGameDirectory_Click"/>
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Click="OpenGameDirectory_Click"/>
             </StackPanel>
 
-            <!-- Icon Buttons -->
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        Margin="0,16,0,0">
+            <Grid HorizontalAlignment="Center"
+                  Margin="0,20,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
                 <!-- Demonlist -->
-                <Button Width="200"
-                        Height="200"
+                <Button Grid.Column="0"
+                        Width="250"
+                        Height="92"
                         Background="Transparent"
+                        BorderBrush="Transparent"
                         BorderThickness="0"
                         Cursor="Hand"
+                        Padding="0"
                         Click="OpenDemonlist_Click">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Grid>
-                                <Border x:Name="DemonlistHover"
-                                        Width="170"
-                                        Height="170"
-                                        Background="Transparent"
-                                        CornerRadius="20"
-                                        Opacity="0"/>
 
-                                <Image Source="/assets/demonlist.png"
-                                       Width="160"
-                                       Height="160"
-                                       Stretch="Uniform"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
-                            </Grid>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
 
-                            <ControlTemplate.Triggers>
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <TranslateTransform Y="0"/>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect BlurRadius="0"
+                                                      ShadowDepth="0"
+                                                      Color="#C8102E"
+                                                      Opacity="0"/>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}"
+                                                CornerRadius="20"
+                                                SnapsToDevicePixels="True">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="DemonlistHover" Property="Background" Value="#33C8102E"/>
-                                    <Setter TargetName="DemonlistHover" Property="Opacity" Value="1"/>
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="24"
+                                                              ShadowDepth="0"
+                                                              Color="#C8102E"
+                                                              Opacity="0.95"/>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <TranslateTransform Y="-6"/>
+                                        </Setter.Value>
+                                    </Setter>
                                 </Trigger>
 
                                 <Trigger Property="IsPressed" Value="True">
-                                    <Setter TargetName="DemonlistHover" Property="Background" Value="#55C8102E"/>
-                                    <Setter TargetName="DemonlistHover" Property="Opacity" Value="1"/>
+                                    <Setter Property="Background" Value="#44C8102E"/>
+
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <TranslateTransform Y="-2"/>
+                                        </Setter.Value>
+                                    </Setter>
                                 </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Button.Template>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Grid>
+                        <Image Source="/assets/demonlist.png"
+                               Width="188"
+                               Height="94"
+                               Stretch="Uniform"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                    </Grid>
                 </Button>
 
                 <!-- Tools -->
-                <Button Width="200"
-                        Height="200"
+                <Button Grid.Column="2"
+                        Width="250"
+                        Height="92"
                         Background="Transparent"
+                        BorderBrush="Transparent"
                         BorderThickness="0"
                         Cursor="Hand"
-                        Margin="34,0,0,0"
+                        Padding="0"
                         Click="OpenTools_Click">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Grid>
-                                <Border x:Name="ToolsHover"
-                                        Width="170"
-                                        Height="170"
-                                        Background="Transparent"
-                                        CornerRadius="20"
-                                        Opacity="0"/>
 
-                                <Image Source="/assets/tools.png"
-                                       Width="160"
-                                       Height="160"
-                                       Stretch="Uniform"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
-                            </Grid>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
 
-                            <ControlTemplate.Triggers>
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <TranslateTransform Y="0"/>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect BlurRadius="0"
+                                                      ShadowDepth="0"
+                                                      Color="#0B57D0"
+                                                      Opacity="0"/>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}"
+                                                CornerRadius="20">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="ToolsHover" Property="Background" Value="#330B57D0"/>
-                                    <Setter TargetName="ToolsHover" Property="Opacity" Value="1"/>
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="24"
+                                                              ShadowDepth="0"
+                                                              Color="#0B57D0"
+                                                              Opacity="0.95"/>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <TranslateTransform Y="-6"/>
+                                        </Setter.Value>
+                                    </Setter>
                                 </Trigger>
 
                                 <Trigger Property="IsPressed" Value="True">
-                                    <Setter TargetName="ToolsHover" Property="Background" Value="#550B57D0"/>
-                                    <Setter TargetName="ToolsHover" Property="Opacity" Value="1"/>
+                                    <Setter Property="Background" Value="#440B57D0"/>
+
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <TranslateTransform Y="-2"/>
+                                        </Setter.Value>
+                                    </Setter>
                                 </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Button.Template>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Grid>
+                        <Image Source="/assets/tools.png"
+                               Width="188"
+                               Height="94"
+                               Stretch="Uniform"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                    </Grid>
                 </Button>
-
-            </StackPanel>
-
+            </Grid>
         </StackPanel>
 
         <TextBlock x:Name="StatusText"

@@ -76,6 +76,236 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="DemonCardButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="Height" Value="92"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        <TranslateTransform X="0" Y="0"/>
+                    </TransformGroup>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="0"
+                                      ShadowDepth="0"
+                                      Color="#C8102E"
+                                      Opacity="0"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="Transparent"
+                                CornerRadius="20"
+                                ClipToBounds="True"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                                 To="1.035"
+                                                 Duration="0:0:0.18">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                                 To="1.035"
+                                                 Duration="0:0:0.18">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
+                                                 To="-6"
+                                                 Duration="0:0:0.18">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)"
+                                                 To="28"
+                                                 Duration="0:0:0.18"/>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Opacity)"
+                                                 To="0.95"
+                                                 Duration="0:0:0.18"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                                 To="1"
+                                                 Duration="0:0:0.20">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                                 To="1"
+                                                 Duration="0:0:0.20">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
+                                                 To="0"
+                                                 Duration="0:0:0.20">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)"
+                                                 To="0"
+                                                 Duration="0:0:0.20"/>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Opacity)"
+                                                 To="0"
+                                                 Duration="0:0:0.20"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Opacity" Value="0.94"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ToolsCardButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="Height" Value="92"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        <TranslateTransform X="0" Y="0"/>
+                    </TransformGroup>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="0"
+                                      ShadowDepth="0"
+                                      Color="#0B57D0"
+                                      Opacity="0"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="Transparent"
+                                CornerRadius="20"
+                                ClipToBounds="True"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                                 To="1.035"
+                                                 Duration="0:0:0.18">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                                 To="1.035"
+                                                 Duration="0:0:0.18">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
+                                                 To="-6"
+                                                 Duration="0:0:0.18">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)"
+                                                 To="28"
+                                                 Duration="0:0:0.18"/>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Opacity)"
+                                                 To="0.95"
+                                                 Duration="0:0:0.18"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                                 To="1"
+                                                 Duration="0:0:0.20">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                                 To="1"
+                                                 Duration="0:0:0.20">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
+                                                 To="0"
+                                                 Duration="0:0:0.20">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)"
+                                                 To="0"
+                                                 Duration="0:0:0.20"/>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Opacity)"
+                                                 To="0"
+                                                 Duration="0:0:0.20"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Opacity" Value="0.94"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
 
     <Grid>
@@ -127,171 +357,26 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Demonlist -->
                 <Button Grid.Column="0"
-                        Width="250"
-                        Height="92"
-                        Background="Transparent"
-                        BorderBrush="Transparent"
-                        BorderThickness="0"
-                        Cursor="Hand"
-                        Padding="0"
+                        Style="{StaticResource DemonCardButtonStyle}"
                         Click="OpenDemonlist_Click">
-
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-
-                            <Setter Property="RenderTransform">
-                                <Setter.Value>
-                                    <TranslateTransform Y="0"/>
-                                </Setter.Value>
-                            </Setter>
-
-                            <Setter Property="Effect">
-                                <Setter.Value>
-                                    <DropShadowEffect BlurRadius="0"
-                                                      ShadowDepth="0"
-                                                      Color="#C8102E"
-                                                      Opacity="0"/>
-                                </Setter.Value>
-                            </Setter>
-
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}"
-                                                CornerRadius="20"
-                                                SnapsToDevicePixels="True">
-                                            <ContentPresenter HorizontalAlignment="Center"
-                                                              VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Effect">
-                                        <Setter.Value>
-                                            <DropShadowEffect BlurRadius="24"
-                                                              ShadowDepth="0"
-                                                              Color="#C8102E"
-                                                              Opacity="0.95"/>
-                                        </Setter.Value>
-                                    </Setter>
-
-                                    <Setter Property="RenderTransform">
-                                        <Setter.Value>
-                                            <TranslateTransform Y="-6"/>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-
-                                <Trigger Property="IsPressed" Value="True">
-                                    <Setter Property="Background" Value="#44C8102E"/>
-
-                                    <Setter Property="RenderTransform">
-                                        <Setter.Value>
-                                            <TranslateTransform Y="-2"/>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-
-                    <Grid>
-                        <Image Source="/assets/demonlist.png"
-                               Width="188"
-                               Height="94"
-                               Stretch="Uniform"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
-                    </Grid>
+                    <Image Source="/assets/demonlist.png"
+                           Width="188"
+                           Height="94"
+                           Stretch="UniformToFill"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
                 </Button>
 
-                <!-- Tools -->
                 <Button Grid.Column="2"
-                        Width="250"
-                        Height="92"
-                        Background="Transparent"
-                        BorderBrush="Transparent"
-                        BorderThickness="0"
-                        Cursor="Hand"
-                        Padding="0"
+                        Style="{StaticResource ToolsCardButtonStyle}"
                         Click="OpenTools_Click">
-
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-
-                            <Setter Property="RenderTransform">
-                                <Setter.Value>
-                                    <TranslateTransform Y="0"/>
-                                </Setter.Value>
-                            </Setter>
-
-                            <Setter Property="Effect">
-                                <Setter.Value>
-                                    <DropShadowEffect BlurRadius="0"
-                                                      ShadowDepth="0"
-                                                      Color="#0B57D0"
-                                                      Opacity="0"/>
-                                </Setter.Value>
-                            </Setter>
-
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}"
-                                                CornerRadius="20">
-                                            <ContentPresenter HorizontalAlignment="Center"
-                                                              VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Effect">
-                                        <Setter.Value>
-                                            <DropShadowEffect BlurRadius="24"
-                                                              ShadowDepth="0"
-                                                              Color="#0B57D0"
-                                                              Opacity="0.95"/>
-                                        </Setter.Value>
-                                    </Setter>
-
-                                    <Setter Property="RenderTransform">
-                                        <Setter.Value>
-                                            <TranslateTransform Y="-6"/>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-
-                                <Trigger Property="IsPressed" Value="True">
-                                    <Setter Property="Background" Value="#440B57D0"/>
-
-                                    <Setter Property="RenderTransform">
-                                        <Setter.Value>
-                                            <TranslateTransform Y="-2"/>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-
-                    <Grid>
-                        <Image Source="/assets/tools.png"
-                               Width="188"
-                               Height="94"
-                               Stretch="Uniform"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
-                    </Grid>
+                    <Image Source="/assets/tools.png"
+                           Width="188"
+                           Height="94"
+                           Stretch="UniformToFill"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
                 </Button>
             </Grid>
         </StackPanel>

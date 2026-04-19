@@ -110,14 +110,103 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Content="AppData Folder"
-                        Style="{StaticResource SecondaryButtonStyle}"
-                        Margin="0,0,10,0"
-                        Click="OpenAppDataFolder_Click"/>
+            Style="{StaticResource SecondaryButtonStyle}"
+            Margin="0,0,10,0"
+            Click="OpenAppDataFolder_Click"/>
 
                 <Button Content="Game Directory"
-                        Style="{StaticResource SecondaryButtonStyle}"
-                        Click="OpenGameDirectory_Click"/>
+            Style="{StaticResource SecondaryButtonStyle}"
+            Click="OpenGameDirectory_Click"/>
             </StackPanel>
+
+            <!-- Icon Buttons -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,16,0,0">
+
+                <!-- Demonlist -->
+                <Button Width="200"
+                        Height="200"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Click="OpenDemonlist_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Border x:Name="DemonlistHover"
+                                        Width="170"
+                                        Height="170"
+                                        Background="Transparent"
+                                        CornerRadius="20"
+                                        Opacity="0"/>
+
+                                <Image Source="/assets/demonlist.png"
+                                       Width="160"
+                                       Height="160"
+                                       Stretch="Uniform"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="DemonlistHover" Property="Background" Value="#33C8102E"/>
+                                    <Setter TargetName="DemonlistHover" Property="Opacity" Value="1"/>
+                                </Trigger>
+
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="DemonlistHover" Property="Background" Value="#55C8102E"/>
+                                    <Setter TargetName="DemonlistHover" Property="Opacity" Value="1"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <!-- Tools -->
+                <Button Width="200"
+                        Height="200"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Margin="34,0,0,0"
+                        Click="OpenTools_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Border x:Name="ToolsHover"
+                                        Width="170"
+                                        Height="170"
+                                        Background="Transparent"
+                                        CornerRadius="20"
+                                        Opacity="0"/>
+
+                                <Image Source="/assets/tools.png"
+                                       Width="160"
+                                       Height="160"
+                                       Stretch="Uniform"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="ToolsHover" Property="Background" Value="#330B57D0"/>
+                                    <Setter TargetName="ToolsHover" Property="Opacity" Value="1"/>
+                                </Trigger>
+
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="ToolsHover" Property="Background" Value="#550B57D0"/>
+                                    <Setter TargetName="ToolsHover" Property="Opacity" Value="1"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+            </StackPanel>
+
         </StackPanel>
 
         <TextBlock x:Name="StatusText"

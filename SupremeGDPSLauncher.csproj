@@ -22,4 +22,14 @@
 	<UseCommonOutputDirectory>true</UseCommonOutputDirectory>
 </PropertyGroup>
 
+<ItemGroup>
+  <None Remove="assets\demonlist.png" />
+  <None Remove="assets\tools.png" />
+</ItemGroup>
+
+<ItemGroup>
+  <Resource Include="assets\demonlist.png" />
+  <Resource Include="assets\tools.png" />
+</ItemGroup>
+
 </Project>

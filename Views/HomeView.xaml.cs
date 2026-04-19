@@ -171,5 +171,27 @@ namespace SupremeGDPSLauncher.Views
                 );
             }
         }
+
+        private void OpenDemonlist_Click(object sender, RoutedEventArgs e)
+        {
+            string url = "https://pycrate.com"; // change later
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = url,
+                UseShellExecute = true
+            });
+        }
+
+        private void OpenTools_Click(object sender, RoutedEventArgs e)
+        {
+            string url = "https://toolspage.com"; // change later
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = url,
+                UseShellExecute = true
+            });
+        }
     }
 }

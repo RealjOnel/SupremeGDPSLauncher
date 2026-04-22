@@ -6,7 +6,8 @@
         Width="980"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
-        Background="#1F1F1F">
+        Background="#1F1F1F"
+        Icon="pack://application:,,,/assets/appicon.ico">
 
     <Window.Resources>
         <SolidColorBrush x:Key="WindowBg" Color="#232323"/>

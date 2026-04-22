@@ -23,12 +23,16 @@
 </PropertyGroup>
 
 <ItemGroup>
+  <None Remove="assets\appicon.ico" />
   <None Remove="assets\demonlist.png" />
+  <None Remove="assets\sgdps_final.png" />
   <None Remove="assets\tools.png" />
 </ItemGroup>
 
 <ItemGroup>
+  <Resource Include="assets\appicon.ico" />
   <Resource Include="assets\demonlist.png" />
+  <Resource Include="assets\sgdps_final.png" />
   <Resource Include="assets\tools.png" />
 </ItemGroup>
 

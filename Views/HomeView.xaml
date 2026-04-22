@@ -323,13 +323,12 @@
                     BorderThickness="1"
                     Margin="0,0,0,28">
                 <Grid>
-                    <TextBlock Text="GD"
-                               Foreground="{StaticResource AccentBrush}"
-                               FontSize="38"
-                               FontWeight="Bold"
-                               FontFamily="Times New Roman"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
+                    <Image Source="/assets/sgdps_final.png"
+                           Width="120"
+                           Height="120"
+                           Stretch="UniformToFill"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
                 </Grid>
             </Border>
 
